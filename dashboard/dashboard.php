@@ -1,217 +1,167 @@
 <?php
-
 include("connection.php");
-
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<script src="https://cdn.tailwindcss.com"></script>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
 
 <div class="flex h-screen bg-gray-100">
 
-    <!-- sidebar -->
-    <div class="hidden md:flex flex-col w-64 bg-gray-800">
-        <div class="flex items-center justify-center h-16 bg-gray-900">
-            <span class="text-white font-bold uppercase">Daystar Dashboard</span>
-        </div>
-        <div class="flex flex-col flex-1 overflow-y-auto">
-            <nav class="flex-1 px-2 py-4 bg-gray-800">
-                <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
-                    <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 7.5v3m0 0v3m0-3h3m-3 0h-3m-2.25-4.125a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0ZM3 19.235v-.11a6.375 6.375 0 0 1 12.75 0v.109A12.318 12.318 0 0 1 9.374 21c-2.331 0-4.512-.645-6.374-1.766Z"
-                />
-              </svg>
-                    Baby Sitters
-                </a>
-                <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
-                    <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z"
-                />
-              </svg>
-                    Babies
-                </a>
-                <a
-              href="#"
-              class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"
-                />
-              </svg>
+  <!-- sidebar -->
+  <div class="hidden md:flex flex-col w-64 bg-gray-800">
+    <div class="flex items-center justify-center h-16 bg-gray-900">
+      <span class="text-white font-bold uppercase">FUT champions</span>
+    </div>
+    <div class="flex flex-col flex-1 overflow-y-auto">
+      <nav class="flex-1 px-2 py-4 bg-gray-800">
+        <a href="#" class="flex items-center px-4 py-2 text-gray-100 hover:bg-gray-700">
+          <i class="pr-4 fa-solid fa-people-group"></i>
+          Players List
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+          <i class="pr-4 fa-solid fa-earth-africa"></i>
+          Nationalities
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+          <i class="pr-4 fa-regular fa-futbol"></i>
+          Clubs
+        </a>
+        <a href="#" class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700">
+          <i class="pr-4 fa-solid fa-court-sport"></i>
+          Players in Field
+        </a>
+      </nav>
+    </div>
+  </div>
 
-              Procurement
-            </a>
-
-            <a
-              href="#"
-              class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M2.25 8.25h19.5M2.25 9h19.5m-16.5 5.25h6m-6 2.25h3m-3.75 3h15a2.25 2.25 0 0 0 2.25-2.25V6.75A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25v10.5A2.25 2.25 0 0 0 4.5 19.5Z"
-                />
-              </svg>
-
-              Transactions
-            </a>
-
-            <a
-              href="#"
-              class="flex items-center px-4 py-2 mt-2 text-gray-100 hover:bg-gray-700"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 mr-2"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M13 10V3L4 14h7v7l9-11h-7z"
-                />
-              </svg>
-              Settings
-            </a>
-                
-                
-            </nav>
-        </div>
+  <!-- Main content -->
+  <div class="flex flex-col flex-1 overflow-y-auto">
+    <div class="flex items-center justify-between h-16 bg-yellow-500 border-b border-gray-200">
+      <div class="flex items-center px-4">
+        <button class="text-gray-500 focus:outline-none focus:text-gray-700">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+        </button>
+        <input class="mx-4 w-full border rounded-md px-4 py-2" type="text" placeholder="Search">
+      </div>
     </div>
 
-    <!-- Main content -->
-     
-    <div class="flex flex-col flex-1 overflow-y-auto">
-      
-        <div class="flex items-center justify-between h-16 bg-white border-b border-gray-200">
-          
-            <div class="flex items-center px-4">
-                <button class="text-gray-500 focus:outline-none focus:text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M4 6h16M4 12h16M4 18h16" />
-                    </svg>
-                </button>
-                <input class="mx-4 w-full border rounded-md px-4 py-2" type="text" placeholder="Search">
-            </div>
-            <div class="flex items-center pr-4">
+    <!-- Add Player Button Above Cards -->
+    <div class="p-4 bg-gray-100">
+      <div class="flex justify-end mb-4">
+        <button class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-md shadow-md transition duration-200">
+          <i class="fa-solid fa-user-plus mr-2"></i> Add Player
+        </button>
+      </div>
 
-                <button
-                    class="flex items-center text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M12 19l-7-7 7-7m5 14l7-7-7-7" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-        <div class="p-4">
-        <div class="shadow-lg rounded-lg overflow-hidden mx-4 md:mx-10">
-          <!-- button section -->
-          <div class="flex gap-4">
-              <a class="px-6 py-2 min-w-[120px] text-center text-white bg-violet-600 border border-violet-600 rounded active:text-violet-500 hover:bg-transparent hover:text-violet-600 focus:outline-none focus:ring"
-                  href="#">
-                  Add Player
-            </a>
+      <!-- Cards Section -->
+      <div class="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+        <!-- Card Item 1 Start -->
+        <div class="rounded-lg border border-stroke bg-white px-6 py-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center justify-start mb-4">
+            <i class="fa-solid fa-people-group text-4xl text-gray-800"></i>
           </div>
-    <table class="w-full table-fixed overflow-x-auto">
-        <thead>
-            <tr class="bg-gray-100">
-                <th class=" w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Name</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Email</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Phone</th>
-                <th class="w-1/4 py-4 px-6 text-left text-gray-600 font-bold uppercase">Status</th>
-                <th class="min-w-6 py-4 px-6 text-left text-gray-600 font-bold uppercase">Status</th>
+          <div class="mt-4 flex items-end justify-between px-4">
+            <div>
+              <h4 class="text-xl font-semibold text-gray-800">11</h4>
+              <span class="text-sm text-gray-500">Total Players</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card Item 1 End -->
+
+        <!-- Card Item 2 Start -->
+        <div class="rounded-lg border border-stroke bg-white px-6 py-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center justify-start mb-4">
+            <i class="fa-solid fa-chart-simple text-4xl text-gray-800"></i>
+          </div>
+          <div class="mt-4 flex items-end justify-between px-4">
+            <div>
+              <h4 class="text-xl font-semibold text-gray-800">87,6</h4>
+              <span class="text-sm text-gray-500">Rating Average</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card Item 2 End -->
+
+        <!-- Card Item 3 Start -->
+        <div class="rounded-lg border border-stroke bg-white px-6 py-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center justify-start mb-4">
+            <i class="fa-solid fa-earth-africa text-4xl text-gray-800"></i>
+          </div>
+          <div class="mt-4 flex items-end justify-between px-4">
+            <div>
+              <h4 class="text-xl font-semibold text-gray-800">120</h4>
+              <span class="text-sm text-gray-500">Total Countries</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card Item 3 End -->
+
+        <!-- Card Item 4 Start -->
+        <div class="rounded-lg border border-stroke bg-white px-6 py-6 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div class="flex items-center justify-start mb-4">
+            <i class="fa-solid fa-futbol text-4xl text-gray-800 "></i>
+          </div>
+          <div class="mt-4 flex items-end justify-between px-4">
+            <div>
+              <h4 class="text-xl font-semibold text-gray-800">60</h4>
+              <span class="text-sm text-gray-500">Total Clubs</span>
+            </div>
+          </div>
+        </div>
+        <!-- Card Item 4 End -->
+      </div>
+    </div>
+
+    <!-- Player List Section -->
+    <div class="rounded-sm border border-stroke bg-white px-5 pb-2.5 pt-6 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
+      <div class="max-w-full overflow-x-auto">
+        <table class="w-full table-auto">
+          <thead>
+            <tr class="bg-gray-800 text-left text-white">
+              <th class="min-w-[150px] px-4 py-4 font-medium xl:pl-11">ID</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Name</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Post</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Nationality</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Current Club</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Rating</th>
+              <th class="min-w-[150px] px-4 py-4 font-medium">Actions</th>
             </tr>
-        </thead>
-        <tbody class="bg-white">
+          </thead>
+          <tbody class="bg-gray-100 text-gray-900">
             <tr>
-                <td class="py-4 px-6 border-b border-gray-200">John Doe</td>
-                <td class="py-4 px-6 border-b border-gray-200 truncate">johndoe@gmail.com</td>
-                <td class="py-4 px-6 border-b border-gray-200">555-555-5555</td>
-                <td class="py-4 px-6 border-b border-gray-200">
-                    <span class="bg-green-500 text-white py-1 px-2 rounded-full text-xs">Active</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="py-4 px-6 border-b border-gray-200">Jane Doe</td>
-                <td class="py-4 px-6 border-b border-gray-200 truncate">janedoe@gmail.com</td>
-                <td class="py-4 px-6 border-b border-gray-200">555-555-5555</td>
-                <td class="py-4 px-6 border-b border-gray-200">
-                    <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Inactive</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="py-4 px-6 border-b border-gray-200">Jane Doe</td>
-                <td class="py-4 px-6 border-b border-gray-200 truncate">janedoe@gmail.com</td>
-                <td class="py-4 px-6 border-b border-gray-200">555-555-5555</td>
-                <td class="py-4 px-6 border-b border-gray-200">
-                    <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Inactive</span>
-                </td>
-            </tr>
-            <tr>
-                <td class="py-4 px-6 border-b border-gray-200">Jane Doe</td>
-                <td class="py-4 px-6 border-b border-gray-200 truncate">janedoe@gmail.com</td>
-                <td class="py-4 px-6 border-b border-gray-200">555-555-5555</td>
-                <td class="py-4 px-6 border-b border-gray-200">
-                    <span class="bg-red-500 text-white py-1 px-2 rounded-full text-xs">Inactive</span>
-                </td>
+              <td class="border-b border-gray-300 px-4 py-5 pl-9 xl:pl-11"><p>15</p></td>
+              <td class="border-b border-gray-300 px-4 py-5"><p>Ilyass Mar</p></td>
+              <td class="border-b border-gray-300 px-4 py-5"><p>Striker</p></td>
+              <td class="border-b border-gray-300 px-4 py-5"><p>Morocco</p></td>
+              <td class="border-b border-gray-300 px-4 py-5"><p>FC Barcelona</p></td>
+              <td class="border-b border-gray-300 px-4 py-5"><p>92</p></td>
+              <td class="border-b border-gray-300 px-4 py-5">
+                <div class="flex items-center space-x-3.5">
+                  <button class="hover:text-blue-500"><i class="fa-solid fa-eye"></i></button>
+                  <button class="hover:text-blue-500"><i class="fa-solid fa-pen"></i></button>
+                  <button class="hover:text-blue-500"><i class="fa-solid fa-trash"></i></button>
+                </div>
+              </td>
             </tr>
             <!-- Add more rows here -->
-        </tbody>
-    </table>
-</div>
-        </div>
+          </tbody>
+        </table>
+      </div>
     </div>
-    
+  </div>
+
 </div>
-    
+
 </body>
 </html>
