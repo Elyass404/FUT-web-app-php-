@@ -4,8 +4,54 @@ include("connection.php");
 $bring_nationalities = "SELECT * FROM nationalities";
 $bring_clubs = "SELECT * FROM clubs";
 
+
 $result_nationalities = mysqli_query($con,$bring_nationalities);
 $result_clubs = mysqli_query($con,$bring_clubs);
+
+if(isset($_POST['add_player'])){
+  
+
+  $player_name = $_POST['full_name'];
+
+  $photo = $_FILES['photo']['name'];
+    $temp_file = $_FILES['photo']['tmp_name'];
+    $folder = "../players_images/$photo";
+    move_uploaded_file($temp_file, $folder);
+  
+    $club = $_POST['club'];
+    $position = $_POST['player-position']; 
+    $nationality = $_POST['nationality'];
+    $rating = $_POST['rating'];
+
+    //players stats
+    $pace = $_POST['pace'];
+    $shooting = $_POST['shooting'];
+    $passing = $_POST['passing'];
+    $dribling = $_POST['dribbling'];
+    $defending = $_POST['defending'];
+    $physical = $_POST['physical'];
+
+    //goalkeeper stats 
+    $diving = $_POST['diving'];
+    $handling = $_POST['handling'];
+    $kicking = $_POST['kicking'];
+    $reflexes = $_POST['reflexes'];
+    $speed = $_POST['speed'];
+    $positioning = $_POST['positioning'];
+
+    $add_player = "INSERT INTO players (name,photo,position,nationality_id,club_id,rating)
+    VALUES ('$player_name','$photo','$position','$nationality','$club','$rating')
+    ";
+
+    $resultplayer= mysqli_query($con,$add_player);
+
+    if(!$resultplayer){
+      die("Query failed: " . mysqli_error($connection));
+    }
+
+
+
+}
 
 
 
@@ -209,7 +255,7 @@ $result_clubs = mysqli_query($con,$bring_clubs);
         
         <div id="photo-input" class="flex flex-col gap-1">
             <label for="player-photo" class="text-base font-medium">Photo</label>
-            <input name="photo" type="text" id="player-photo" class=" input-colors rounded py-2 px-3">
+            <input name="photo" type="file" id="player-photo" class=" input-colors rounded py-2 px-3">
             <span id="photo-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Photo must be a valid URL with a CDN image.</span>
         </div>
 
@@ -364,7 +410,7 @@ $result_clubs = mysqli_query($con,$bring_clubs);
         
 
     </div>
-<button type="button" id="add-player-btn" class=" bg-violet-700 text-white w-full px-8 py-4 rounded ">add player</button>
+<button type="submit" name ="add_player" id="add-player-btn" class=" bg-violet-700 text-white w-full px-8 py-4 rounded ">add player</button>
 <button type="button" id="update-player-btn" class=" bg-orange-500 text-white w-full px-8 py-4 rounded hidden">Save Changes</button>
 <button type="button" id="cancel-update-player-btn" class=" bg-red-500 text-white w-full px-8 py-4 rounded hidden">cancel</button>
         

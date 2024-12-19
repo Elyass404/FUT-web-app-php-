@@ -18,7 +18,6 @@ CREATE Table players (
     name VARCHAR(50),
     photo VARCHAR(100),
     position ENUM("gk","rb","rcb","lcb","lb","rm","cm","lm","rw","st","lw"),
-    status ENUM ("in_field","bench"),
     nationality_id int,
     club_id int, 
     rating int,
@@ -27,8 +26,8 @@ CREATE Table players (
     Foreign Key (club_id) REFERENCES clubs (club_id)
 );
 
-INSERT into players (name,position,nationality_id,club_id,rating)
-VALUES("ilyass","st",1,1,88);
+INSERT into players (name,photo,position,nationality_id,club_id,rating)
+VALUES("ilyass","https://cdn.sofifa.net/players/212/198/25_120.png","st",1,1,88);
 
 CREATE Table goalkeeper_stats(
     player_id int PRIMARY KEY,
