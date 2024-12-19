@@ -14,7 +14,7 @@ create table nationalities (
 )
 
 CREATE Table players (
-    player_id int PRIMARY KEY,
+    player_id int PRIMARY KEY AUTO_INCREMENT ,
     name VARCHAR(50),
     photo VARCHAR(100),
     position ENUM("gk","rb","rcb","lcb","lb","rm","cm","lm","rw","st","lw"),
@@ -26,6 +26,9 @@ CREATE Table players (
     Foreign Key (nationality_id) REFERENCES nationalities (nationality_id),
     Foreign Key (club_id) REFERENCES clubs (club_id)
 );
+
+INSERT into players (name,position,nationality_id,club_id,rating)
+VALUES("ilyass","st",1,1,88);
 
 CREATE Table goalkeeper_stats(
     player_id int PRIMARY KEY,
@@ -48,6 +51,8 @@ CREATE Table player_stats(
     physical int,
     Foreign Key (player_id) REFERENCES players (player_id)
 );
+
+DROP Table players;
 
 INSERT into nationalities (nationality_name, nationality_logo)
 VALUES
