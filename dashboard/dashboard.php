@@ -42,12 +42,29 @@ if(isset($_POST['add_player'])){
     $add_player = "INSERT INTO players (name,photo,position,nationality_id,club_id,rating)
     VALUES ('$player_name','$photo','$position','$nationality','$club','$rating')
     ";
+// the query to add the player into the palyers table 
+    $result_player= mysqli_query($con,$add_player);
 
-    $resultplayer= mysqli_query($con,$add_player);
 
-    if(!$resultplayer){
-      die("Query failed: " . mysqli_error($connection));
+    if($result_player){
+      $get_id = mysqli_insert_id($con);
+
+      if ($position == "gk"){
+        $gk_stats_table = " INSERT INTO goalkeeper_stats (player_id,diving,handling,kicking, reflexes, speed, positioning)
+        VALUES ('$get_id','$diving','$handling','$kicking','$reflexes','$speed','$positioning')
+        ";
+
+      mysqli_query($con,$gk_stats_table);
+      }else{
+        $player_stats_table =" INSERT INTO player_stats (player_id,pace,shooting,passing, dribling, defending, physical)
+        VALUES ('$get_id','$pace','$shooting','$passing','$dribling','$defending','$physical')
+        ";
+
+        mysqli_query($con,$player_stats_table);
+
+      }
     }
+
 
 
 

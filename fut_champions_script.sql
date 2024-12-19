@@ -40,6 +40,8 @@ CREATE Table goalkeeper_stats(
     Foreign Key (player_id) REFERENCES players (player_id)
 );
 
+SELECT * from player_stats;
+
 CREATE Table player_stats(
     player_id int PRIMARY KEY,
     pace int,
