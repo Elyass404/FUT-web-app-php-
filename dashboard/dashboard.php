@@ -59,7 +59,6 @@ if(isset($_POST['add_player'])){
         $player_stats_table =" INSERT INTO player_stats (player_id,pace,shooting,passing, dribling, defending, physical)
         VALUES ('$get_id','$pace','$shooting','$passing','$dribling','$defending','$physical')
         ";
-
         mysqli_query($con,$player_stats_table);
 
       }
