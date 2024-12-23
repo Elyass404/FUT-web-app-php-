@@ -1,6 +1,8 @@
 <?php
 include ('connection.php');
 
+// $diving = mysqli_real_escape_string($con, $_POST['diving')]; //to prevent sql injections
+
 $bring_nationalities = "SELECT * FROM nationalities";
 $bring_clubs = "SELECT * FROM clubs";
 
@@ -13,12 +15,94 @@ if(isset($_GET['id'])){
 
 $id = intval($_GET['id']);
 echo( $id + 100);
-$bring_players_data = "SELECT * FROM players WHERE player_id = $id ";
+
+$bring_players_data = "SELECT * FROM players 
+JOIN player_stats ON player_stats.player_id = players.player_id 
+WHERE players.player_id = $id";
 $result_data = mysqli_query($con,$bring_players_data);
 
 $player = mysqli_fetch_assoc($result_data);
 echo($player['name']);
 echo($player['position']);
+
+if(isset($_POST['update-player-btn'])){
+  
+
+    $player_name = $_POST['full_name'];
+  
+    $photo = $_FILES['photo']['name'];
+      $temp_file = $_FILES['photo']['tmp_name'];
+      $folder = "../players_images/$photo";
+      move_uploaded_file($temp_file, $folder);
+    
+      $club = $_POST['club'];
+      $position = $_POST['player-position']; 
+      $nationality = $_POST['nationality'];
+      $rating = $_POST['rating'];
+  
+      //players stats
+      $pace = $_POST['pace'];
+      $shooting = $_POST['shooting'];
+      $passing = $_POST['passing'];
+      $dribling = $_POST['dribbling'];
+      $defending = $_POST['defending'];
+      $physical = $_POST['physical'];
+  
+      //goalkeeper stats 
+      $diving = $_POST['diving'];
+      $handling = $_POST['handling'];
+      $kicking = $_POST['kicking'];
+      $reflexes = $_POST['reflexes'];
+      $speed = $_POST['speed'];
+      $positioning = $_POST['positioning'];
+
+      $update_player = "UPDATE players 
+      SET name = '$player_name',
+      photo = '$photo',
+      position= '$position',
+      nationality_id= '$nationality',
+      club_id= '$club',
+      rating= '$rating'
+      WHERE player_id = $id
+      ";
+  // the query to update the player in the palyers table 
+      $result_player= mysqli_query($con,$update_player);
+  
+    if($result_player){
+  
+    if ($position == "gk"){
+      $gk_stats_table = "UPDATE goalkeeper_stats SET
+      diving =  '$diving',
+      handling =  '$handling',
+      kicking= '$kicking',
+      reflexes= '$reflexes',
+      speed= '$speed',
+      positioning= '$positioning'
+      WHERE player_id = $id
+      ";
+
+      mysqli_query($con,$gk_stats_table);
+      header("location:dashboard.php");
+
+    }else{
+
+      $player_stats_table ="UPDATE player_stats SET
+      pace = '$pace',
+      shooting = '$shooting',
+      passing= '$passing',
+      dribling= '$dribling',
+      defending= '$defending',
+      physical= '$physical'
+      WHERE player_id = $id
+      ";
+          mysqli_query($con,$player_stats_table);
+  
+        }
+      }
+      header("location:dashboard.php");
+  
+  }
+  
 
 ?>
 
@@ -39,18 +123,18 @@ echo($player['position']);
 
 <div id="addModal" class=" absolute right-0 top-0 h-full bg-gray-800 bg-opacity-60 grid grid-cols-12 gap-8 py-8 mx-auto w-full ">
 <section class="bg-gray-600 form-height col-span-12 lg: col-start-4 col-end-10 px-6 py-8 overflow-y-scroll hide-scrollbar text-white rounded-lg">
-    <form action="dashboard.php" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">
+    <form action="show.php?id=<?= $id ?>" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">
         <input id="id-input" type="hidden">
 
         <div id="name-input" class="flex flex-col gap-1">
             <label for="player-name" class="text-base font-medium">Full Name</label>
-            <input name="full_name" type="text" id="player-name-input" value="<?= ($player['name']) ;?>" class="input-colors input-colors rounded py-2 px-3 ">
+            <input name="full_name" type="text" id="player-name-input" value="<?= $player['name'] ;?>" class="input-colors input-colors rounded py-2 px-3 ">
             <span id="name-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Name must be at least 2 letters and no digits.</span>
         </div>
         
         <div id="photo-input" class="flex flex-col gap-1">
             <label for="player-photo" class="text-base font-medium">Photo</label>
-            <input name="photo" type="file" id="player-photo" value="<?= ($player['photo']) ;?>" class=" input-colors rounded py-2 px-3">
+            <input name="photo" type="file" id="player-photo" value="<?= $player['photo'] ;?>" class=" input-colors rounded py-2 px-3">
             <span id="photo-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Photo must be a valid URL with a CDN image.</span>
         </div>
 
@@ -114,13 +198,13 @@ echo($player['position']);
 
         <div id="pace-input" class="w-1/2 flex flex-col gap-1">
             <label for="pace" class="text-base font-medium">Pace</label>
-            <input name="pace" type="number" id="pace" class="input-colors rounded py-2 px-3">
+            <input name="pace" type="number" id="pace" value="<?= $player['pace'] ?>" class="input-colors rounded py-2 px-3">
             <span id="pace-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="shooting-input" class="w-1/2 flex flex-col gap-1">
             <label for="shooting" class="text-base font-medium">Shooting</label>
-            <input name="shooting" type="number" id="shooting" class="input-colors rounded py-2 px-3">
+            <input name="shooting" type="number" id="shooting" value="<?= $player['shooting'] ?>" class="input-colors rounded py-2 px-3">
             <span id="shooting-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
     </div>
@@ -128,26 +212,26 @@ echo($player['position']);
 
         <div id="passing-input" class="w-1/2 flex flex-col gap-1">
             <label for="passing" class="text-base font-medium">Passing</label>
-            <input name="passing" type="number" id="passing" class="input-colors rounded py-2 px-3">
+            <input name="passing" type="number" id="passing" value="<?= $player['passing'] ?>" class="input-colors rounded py-2 px-3">
             <span id="passing-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="dribbling-input" class="w-1/2 flex flex-col gap-1">
             <label for="dribbling" class="text-base font-medium">Dribbling</label>
-            <input name="dribbling" type="number" id="dribbling" class="input-colors rounded py-2 px-3">
+            <input name="dribbling" type="number" id="dribbling" value="<?= $player['dribling'] ?>" class="input-colors rounded py-2 px-3">
             <span id="dribbling-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
     </div>
     <div class=" max-w-full flex flex-row gap-2" >
         <div id="defending-input" class="w-1/2 flex flex-col gap-1">
             <label for="defending" class="text-base font-medium">Defending</label>
-            <input name="defending" type="number" id="defending" class="input-colors rounded py-2 px-3">
+            <input name="defending" type="number" id="defending" value="<?= $player['defending'] ?>" class="input-colors rounded py-2 px-3">
             <span id="defending-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="physical-input" class="w-1/2 flex flex-col gap-1">
             <label for="physical" class="text-base font-medium">Physical</label>
-            <input name="physical" type="number" id="physical" class="input-colors rounded py-2 px-3">
+            <input name="physical" type="number" id="physical" value="<?= $player['physical'] ?>" class="input-colors rounded py-2 px-3">
             <span id="physical-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
     </div>
@@ -205,14 +289,44 @@ echo($player['position']);
         
 
     </div>
-<button type="submit" name ="add_player" id="add-player-btn" class=" bg-violet-700 text-white w-full px-8 py-4 rounded ">add player</button>
-<button type="button" id="update-player-btn" class=" bg-orange-500 text-white w-full px-8 py-4 rounded hidden">Save Changes</button>
-<button type="button" id="cancel-update-player-btn" class=" bg-red-500 text-white w-full px-8 py-4 rounded hidden">cancel</button>
+<button type="submit" name ="add_player" id="add-player-btn" class=" bg-violet-700 text-white w-full px-8 py-4 rounded hidden">add player</button>
+<button type="submit" name="update-player-btn" id="update-player-btn" class=" bg-orange-500 text-white w-full px-8 py-4 rounded ">Save Changes</button>
+<button type="button" id="cancel-update-player-btn" class=" bg-red-500 text-white w-full px-8 py-4 rounded "><a href="dashboard.php">cancel</a></button>
         
     </form>
 </section>
 </div>
 
-<script></script>
+<script>
+    let goalKeeperInputs = document.getElementById("goalkeeper-only-inputs");
+    let playersInputs = document.getElementById("players-only-inputs");
+    let position = document.getElementById("player-position");
+    let cancelFormBtn = document.getElementById("cancel-update-player-btn");
+
+
+function showingInputs(){
+    if(position.value == "gk"){
+      goalKeeperInputs.classList.remove("hidden");
+      playersInputs.classList.add("hidden");
+
+  }else if(position.value == "") {
+      goalKeeperInputs.classList.add("hidden");
+      playersInputs.classList.add("hidden");
+
+  }else {
+      goalKeeperInputs.classList.add("hidden");
+      playersInputs.classList.remove("hidden");
+  }  
+}
+
+cancelFormBtn.addEventListener("click", function(){
+modal.classList.add("hidden");
+});
+
+showingInputs();
+
+position.addEventListener('change',showingInputs);
+
+</script>
 </body>
 </html>

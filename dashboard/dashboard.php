@@ -82,13 +82,7 @@ if(isset($_POST['add_player'])){
 
     header("location:dashboard.php");
 
-
-
 }
-
-
-
-
 
 ?>
 
@@ -445,7 +439,7 @@ if(isset($_POST['add_player'])){
     </div>
 <button type="submit" name ="add_player" id="add-player-btn" class=" bg-violet-700 text-white w-full px-8 py-4 rounded ">add player</button>
 <button type="button" id="update-player-btn" class=" bg-orange-500 text-white w-full px-8 py-4 rounded hidden">Save Changes</button>
-<button type="button" id="cancel-update-player-btn" class=" bg-red-500 text-white w-full px-8 py-4 rounded hidden">cancel</button>
+<button type="button" id="cancel-update-player-btn" class=" bg-red-500 text-white w-full px-8 py-4 rounded ">cancel</button>
         
     </form>
 </section>

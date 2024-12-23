@@ -4,6 +4,7 @@ let playersInputs = document.getElementById("players-only-inputs");
 let position = document.getElementById("player-position");
 let addPlayerBtn = document.getElementById("addPlayerBtn");
 let modal = document.getElementById("addModal");
+let cancelFormBtn = document.getElementById("cancel-update-player-btn");
 
 //------------------ Start Functions Daclaration section------------------
 function showingInputs(){
@@ -27,6 +28,10 @@ function showingInputs(){
 
 addPlayerBtn.addEventListener("click", function(){
 modal.classList.remove("hidden");
+});
+
+cancelFormBtn.addEventListener("click", function(){
+modal.classList.add("hidden");
 })
 
 showingInputs();
