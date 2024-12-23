@@ -4,15 +4,13 @@ use Dotenv\Dotenv;
 require '../vendor/autoload.php'; // Composer autoloader
 
 // Load .env file from the root of your project
-$dotenv = Dotenv::createImmutable(__DIR__);
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
 $dotenv->load();
 
 
-$host = getenv('host');
-$ndb = getenv('ndb');
-$user = getenv('user');
-$pw = getenv('pw');
-$con = mysqli_connect($host,$user,$pw,$ndb);
+/*Connect to the database using the enviroment variables you declared in the .eenv file, with
+the help of $_ENV super global variable*/
+$con = mysqli_connect($_ENV['host'],$_ENV['user'],$_ENV['pw'],$_ENV['ndb'],);
 
 
 

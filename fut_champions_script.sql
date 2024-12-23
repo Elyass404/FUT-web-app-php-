@@ -1,8 +1,8 @@
 -- Active: 1733760231294@@127.0.0.1@3306@fut_champions
 CREATE DATABASE fut_champions_scripts;
 
-create table club (
-    club_id in PRIMARY KEY AUTO_INCREMENT,
+create table clubs (
+    club_id int PRIMARY KEY AUTO_INCREMENT,
     club_name VARCHAR (50),
     club_logo VARCHAR(50)
 );
@@ -25,6 +25,8 @@ CREATE Table players (
     Foreign Key (nationality_id) REFERENCES nationalities (nationality_id),
     Foreign Key (club_id) REFERENCES clubs (club_id)
 );
+
+SELECT * FROM players;
 
 INSERT into players (name,photo,position,nationality_id,club_id,rating)
 VALUES("ilyass","https://cdn.sofifa.net/players/212/198/25_120.png","st",1,1,88);
@@ -75,6 +77,13 @@ VALUES
 ("Bayern Munich","https://cdn.sofifa.net/meta/team/503/120.png"),
 ("Manchester United","https://cdn.sofifa.net/meta/team/14/120.png");
 
+SELECT *,
+          nationality_name,
+          nationality_logo,
+          club_logo
+          FROM players
+          join nationalities on players.nationality_id = nationalities.nationality_id
+          join clubs on players.club_id = clubs.club_id
 
 
 

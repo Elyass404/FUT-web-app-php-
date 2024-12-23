@@ -1,6 +1,22 @@
 <?php
 include("connection.php");
 
+$count_players_query ="SELECT COUNT(*) as total_players FROM players";
+$count_players_result= mysqli_query($con,$count_players_query);
+$count_players= mysqli_fetch_assoc($count_players_result);
+
+$count_countries_query ="SELECT COUNT(*) as total_countries FROM nationalities";
+$count_countries_result= mysqli_query($con,$count_countries_query);
+$count_countries= mysqli_fetch_assoc($count_countries_result);
+
+$count_clubs_query ="SELECT COUNT(*) as total_clubs FROM clubs";
+$count_clubs_result= mysqli_query($con,$count_clubs_query);
+$count_clubs= mysqli_fetch_assoc($count_clubs_result);
+
+$average_rating_query= "SELECT ROUND( AVG(rating) , 2) as average_rating FROM players";
+$average_rating_result = mysqli_query($con,$average_rating_query);
+$average_rating= mysqli_fetch_assoc($average_rating_result);
+
 $bring_nationalities = "SELECT * FROM nationalities";
 $bring_clubs = "SELECT * FROM clubs";
 
@@ -64,6 +80,7 @@ if(isset($_POST['add_player'])){
       }
     }
 
+    header("location:dashboard.php");
 
 
 
@@ -149,7 +166,7 @@ if(isset($_POST['add_player'])){
           </div>
           <div class="mt-4 flex items-end justify-between px-4">
             <div>
-              <h4 class="text-xl font-semibold text-gray-800">11</h4>
+              <h4 class="text-xl font-semibold text-gray-800"><?= $count_players['total_players'] ?></h4>
               <span class="text-sm text-gray-500">Total Players</span>
             </div>
           </div>
@@ -163,7 +180,7 @@ if(isset($_POST['add_player'])){
           </div>
           <div class="mt-4 flex items-end justify-between px-4">
             <div>
-              <h4 class="text-xl font-semibold text-gray-800">87,6</h4>
+              <h4 class="text-xl font-semibold text-gray-800"><?= $average_rating['average_rating'] ?></h4>
               <span class="text-sm text-gray-500">Rating Average</span>
             </div>
           </div>
@@ -177,7 +194,7 @@ if(isset($_POST['add_player'])){
           </div>
           <div class="mt-4 flex items-end justify-between px-4">
             <div>
-              <h4 class="text-xl font-semibold text-gray-800">120</h4>
+              <h4 class="text-xl font-semibold text-gray-800"><?= $count_countries['total_countries'] ?></h4>
               <span class="text-sm text-gray-500">Total Countries</span>
             </div>
           </div>
@@ -191,7 +208,7 @@ if(isset($_POST['add_player'])){
           </div>
           <div class="mt-4 flex items-end justify-between px-4">
             <div>
-              <h4 class="text-xl font-semibold text-gray-800">60</h4>
+              <h4 class="text-xl font-semibold text-gray-800"><?= $count_clubs['total_clubs'] ?></h4>
               <span class="text-sm text-gray-500">Total Clubs</span>
             </div>
           </div>
@@ -297,7 +314,7 @@ if(isset($_POST['add_player'])){
         <div id="nationality-input" class="flex flex-col gap-1">
             <label for="player-nationality" class="text-base font-medium">Nationality</label>
             <select name="nationality" id="player-nationality" class="input-colors rounded py-2 px-3">
-                <option value=""select>Select Nationality</option>
+                <option value="">Select Nationality</option>
                 <?php
                 while($nationality = mysqli_fetch_assoc($result_nationalities)):
                 ?>
@@ -310,7 +327,7 @@ if(isset($_POST['add_player'])){
         <div id="current-club-input" class="flex flex-col gap-1">
             <label for="current-club" class="text-base font-medium">Current Club</label>
             <select name="club" id="player-club" class="input-colors rounded py-2 px-3">
-              <option value=""select>Select Club</option>
+              <option value="">Select Club</option>
               <?php
               while($club = mysqli_fetch_assoc($result_clubs)):
               ?>
