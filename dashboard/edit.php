@@ -16,14 +16,32 @@ if(isset($_GET['id'])){
 $id = intval($_GET['id']);
 echo( $id + 100);
 
-$bring_players_data = "SELECT * FROM players 
-JOIN player_stats ON player_stats.player_id = players.player_id 
-WHERE players.player_id = $id";
-$result_data = mysqli_query($con,$bring_players_data);
+$check_position_query =" SELECT position FROM players WHERE player_id= $id";
+$check_position_row= mysqli_query($con, $check_position_query);
+$check_position_result = mysqli_fetch_assoc($check_position_row);
 
-$player = mysqli_fetch_assoc($result_data);
+
+if($check_position_result['position'] !== "gk"){  
+    echo("herrrrrrrrrrrrre");
+    $bring_players_data = "SELECT *
+    FROM players 
+    JOIN player_stats ON player_stats.player_id = players.player_id 
+    WHERE players.player_id = $id";
+    $result_data = mysqli_query($con,$bring_players_data);
+    $player = mysqli_fetch_assoc($result_data);
+}else{
+    echo("ooooooooooo");
+    $bring_players_data = "SELECT *
+    FROM players 
+    JOIN goalkeeper_stats ON goalkeeper_stats.player_id = players.player_id
+    WHERE players.player_id = $id";
+    $result_data = mysqli_query($con,$bring_players_data);
+    $player = mysqli_fetch_assoc($result_data);
+}
+
+
+
 echo($player['name']);
-echo($player['position']);
 
 if(isset($_POST['update-player-btn'])){
   
@@ -123,7 +141,7 @@ if(isset($_POST['update-player-btn'])){
 
 <div id="addModal" class=" absolute right-0 top-0 h-full bg-gray-800 bg-opacity-60 grid grid-cols-12 gap-8 py-8 mx-auto w-full ">
 <section class="bg-gray-600 form-height col-span-12 lg: col-start-4 col-end-10 px-6 py-8 overflow-y-scroll hide-scrollbar text-white rounded-lg">
-    <form action="show.php?id=<?= $id ?>" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">
+    <form action="edit.php?id=<?= $id ?>" class="flex flex-col gap-4" method="POST" enctype="multipart/form-data">
         <input id="id-input" type="hidden">
 
         <div id="name-input" class="flex flex-col gap-1">
@@ -242,13 +260,13 @@ if(isset($_POST['update-player-btn'])){
 
         <div id="diving-input" class="w-1/2 flex flex-col gap-1">
             <label for="diving" class="text-base font-medium">Diving</label>
-            <input name="diving" type="number" id="diving" class="input-colors rounded py-2 px-3">
+            <input name="diving" type="number" value="<?= $player['diving'] ?>" id="diving" class="input-colors rounded py-2 px-3">
             <span id="diving-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="handling-input" class="w-1/2 flex flex-col gap-1">
             <label for="handling" class="text-base font-medium">Handling</label>
-            <input name="handling" type="number" id="handling" class="input-colors rounded py-2 px-3">
+            <input name="handling" type="number" id="handling" value="<?= $player['handling'] ?>" class="input-colors rounded py-2 px-3">
             <span id="handling-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
 
@@ -258,13 +276,13 @@ if(isset($_POST['update-player-btn'])){
             
         <div id="kicking-input" class="w-1/2 flex flex-col gap-1">
             <label for="kicking" class="text-base font-medium">Kicking</label>
-            <input name="kicking" type="number" id="kicking" class="input-colors rounded py-2 px-3">
+            <input name="kicking" type="number" id="kicking" value="<?= $player['kicking'] ?>" class="input-colors rounded py-2 px-3">
             <span id="kicking-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="reflexes-input" class="w-1/2 flex flex-col gap-1">
             <label for="reflexes" class="text-base font-medium">Reflexes</label>
-            <input name="reflexes" type="number" id="reflexes" class="input-colors rounded py-2 px-3">
+            <input name="reflexes" type="number" id="reflexes" value="<?= $player['reflexes'] ?>" class="input-colors rounded py-2 px-3">
             <span id="reflexes-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
 
@@ -273,13 +291,13 @@ if(isset($_POST['update-player-btn'])){
         <div class=" max-w-full flex flex-row gap-2" >
         <div id="speed-input" class=" w-1/2 flex flex-col gap-1">
             <label for="speed" class="text-base font-medium">Speed</label>
-            <input name="speed" type="number" id="speed" class="input-colors rounded py-2 px-3">
+            <input name="speed" type="number" id="speed" value="<?= $player['speed'] ?>" class="input-colors rounded py-2 px-3">
             <span id="speed-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>
         
         <div id="positioning-input" class="w-1/2 flex flex-col gap-1">
             <label for="positioning" class="text-base font-medium">Positioning</label>
-            <input name="positioning" type="number" id="positioning" class="input-colors rounded py-2 px-3">
+            <input name="positioning" type="number" id="positioning" value="<?= $player['positioning'] ?>" class="input-colors rounded py-2 px-3">
             <span id="positioning-error" class="text-red-600 text-sm hidden"><i class="fa-solid fa-diamond-exclamation"></i> Value must be between 10 and 99.</span>
         </div>  
 

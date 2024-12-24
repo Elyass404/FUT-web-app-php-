@@ -254,8 +254,8 @@ if(isset($_POST['add_player'])){
               <td class="border-b border-gray-300 px-4 py-5">
                 <div class="flex items-center space-x-3.5">
                   <button class="hover:text-blue-500"><a href="show.php?id=<?=$player["player_id"] ?>"><i class="fa-solid fa-eye"></i></button></a>
-                  <button class="hover:text-blue-500"><a href="edit.php"><i class="fa-solid fa-pen"></i></button></a>
-                  <button class="hover:text-blue-500"><a href="delete.php"><i class="fa-solid fa-trash"></i></button></a>
+                  <button class="hover:text-blue-500"><a href="edit.php?id=<?=$player["player_id"] ?>"><i class="fa-solid fa-pen"></i></button></a>
+                  <button class="hover:text-blue-500"><a href="delete.php?id=<?=$player["player_id"] ?>"><i class="fa-solid fa-trash"></i></button></a>
                 </div>
               </td>
             </tr>
