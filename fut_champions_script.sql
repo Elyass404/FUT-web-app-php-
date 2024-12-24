@@ -26,7 +26,13 @@ CREATE Table players (
     Foreign Key (club_id) REFERENCES clubs (club_id)
 );
 
-SELECT * FROM players;
+
+ALTER TABLE player_stats
+ADD CONSTRAINT fk_player_stats
+FOREIGN KEY (player_id)
+REFERENCES players(player_id)
+ON DELETE CASCADE; 
+
 
 INSERT into players (name,photo,position,nationality_id,club_id,rating)
 VALUES("ilyass","https://cdn.sofifa.net/players/212/198/25_120.png","st",1,1,88);
@@ -39,10 +45,9 @@ CREATE Table goalkeeper_stats(
     reflexes int,
     speed int,
     positioning int,
-    Foreign Key (player_id) REFERENCES players (player_id)
+    Foreign Key (player_id) REFERENCES players (player_id) ON DELETE CASCADE
 );
 
-SELECT * from player_stats;
 
 CREATE Table player_stats(
     player_id int PRIMARY KEY,
@@ -52,7 +57,7 @@ CREATE Table player_stats(
     dribling int,
     defending int,
     physical int,
-    Foreign Key (player_id) REFERENCES players (player_id)
+    Foreign Key (player_id) REFERENCES players (player_id) ON DELETE CASCADE
 );
 
 DROP Table players;
