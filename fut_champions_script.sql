@@ -26,13 +26,14 @@ CREATE Table players (
     Foreign Key (club_id) REFERENCES clubs (club_id)
 );
 
-
+--the following query is to make the foreign key has constraint "on delete cascade" 
 ALTER TABLE player_stats
 ADD CONSTRAINT fk_player_stats
 FOREIGN KEY (player_id)
 REFERENCES players(player_id)
 ON DELETE CASCADE; 
 
+SELECT* FROM player_stats
 
 INSERT into players (name,photo,position,nationality_id,club_id,rating)
 VALUES("ilyass","https://cdn.sofifa.net/players/212/198/25_120.png","st",1,1,88);
@@ -90,6 +91,15 @@ SELECT *,
           join nationalities on players.nationality_id = nationalities.nationality_id
           join clubs on players.club_id = clubs.club_id
 
+
+-- THE FOLLOWING QUERY IS TO BRING THE CLUB WITH HIGHEST TOTAL OF PLAYERS
+
+SELECT  clb.club_name as club_name, players.club_id , COUNT(players.club_id) as totalplayers
+FROM clubs clb
+JOIN players ON players.club_id = clb.club_id
+GROUP BY players.club_id 
+ORDER BY totalplayers DESC
+LIMIT 1
 
 
 
